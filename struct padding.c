@@ -1,8 +1,8 @@
 #include <stdio.h>
-#pragma pack 1
+//#pragma pack 1
 
 struct data{
-int date;
+int date :2;
 char ch;
 int month, year
 }d;
