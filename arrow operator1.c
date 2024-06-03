@@ -2,7 +2,7 @@
 
 struct player
 {
-    char gender[10];
+    char gender;
     char name[50];
 };
 
@@ -16,10 +16,10 @@ int main()
     scanf("%s", ptr->name);
 
     printf("Enter gender: ");
-    scanf("%s", ptr->gender);
+    scanf(" %c", ptr->gender);
 
     printf("The name of the player is: %s\n", ptr->name);
-    printf("The gender of that person is: %s\n", ptr->gender);
+    printf("The gender of that person is: %c\n", ptr->gender);
 
     return 0;
 }
