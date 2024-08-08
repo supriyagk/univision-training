@@ -1,0 +1,23 @@
+#include "board_LED.h"
+void delay (delay)
+{
+unit32_t i +0;
+for (i=0;i<500000;i++);
+}
+
+int main()
+{
+while(1)
+{
+LED_initialize();
+LED_on(0);
+LED_on(1);
+LED_on(2);
+LED_on(3);
+delay();
+LED_off(0);
+LED_off(1);
+LED_off(2);
+LED_off(3);
+delay();
+Fruit: Mango, Quantity: 2.00 kg, Total Price: 60.00, Payment Method: Cash

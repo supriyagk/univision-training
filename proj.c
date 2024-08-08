@@ -2,24 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "FruitOrder.h"
-#include "orderFruit.c"
-#include "calculateTotalPrice.c"
-#include "getMenuOption.c"
-#include "getPaymentMethod.c"
-#include "validatePayment.c"
-#include "processPayment.c"
 
 // Function prototypes
 void saveOrderHistory(struct FruitOrder* order, float totalPrice, enum PaymentMethod paymentMethod);
-void displayOrderHistory();
-void sortOrderHistory();
-
-// Constants
-#define MAX_ORDERS 100
-
-// Global variables
-struct FruitOrder orders[MAX_ORDERS];
-int orderCount = 0;
 
 int main() {
     int menuOption;
@@ -106,9 +91,6 @@ int main() {
     } while (menuOption != 6);
 
     free(order);
-    displayOrderHistory();
-    sortOrderHistory();
-
     return 0;
 }
 
@@ -125,36 +107,4 @@ void saveOrderHistory(struct FruitOrder* order, float totalPrice, enum PaymentMe
             order->fruitName, order->quantity, order->unit, totalPrice, paymentMethods[paymentMethod]);
 
     fclose(file);
-
-    // Save to array
-    if (orderCount < MAX_ORDERS) {
-        orders[orderCount++] = *order;
-    } else {
-        printf("Order history is full.\n");
-    }
-}
-
-// Function to display order history
-void displayOrderHistory() {
-    printf("\nOrder History:\n");
-    for (int i = 0; i < orderCount; i++) {
-        printf("Fruit: %s, Quantity: %.2f %s, Total Price: %.2f\n",
-               orders[i].fruitName, orders[i].quantity, orders[i].unit, orders[i].pricePerUnit * orders[i].quantity);
-    }
-}
-
-// Function to sort order history by total price
-void sortOrderHistory() {
-    for (int i = 0; i < orderCount - 1; i++) {
-        for (int j = 0; j < orderCount - i - 1; j++) {
-            if (orders[j].pricePerUnit * orders[j].quantity > orders[j + 1].pricePerUnit * orders[j + 1].quantity) {
-                struct FruitOrder temp = orders[j];
-                orders[j] = orders[j + 1];
-                orders[j + 1] = temp;
-            }
-        }
-    }
-
-    printf("\nSorted Order History by Total Price:\n");
-    displayOrderHistory();
 }
